@@ -1,0 +1,14 @@
+$screen-xs: 576px;
+$screen-sm: 768px;
+$screen-xs-max: $screen-sm - 1;
+@mixin mobile {
+  @media screen and (max-width: $screen-xs-max) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (max-width: $screen-sm) and (min-width:$screen-xs) {
+    @content;
+  }
+}

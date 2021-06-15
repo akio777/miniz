@@ -1,0 +1,73 @@
+
+:root{
+  --pink-1:#D887E5;
+  --purple-1:#7D46EA;
+  --purple-2:#8D44AD;
+  --purple-3:#8B3C7D;
+  --yellow-1:#F7DB80;
+  --yellow-2:#F2E426;
+  --yellow-3:#E5A419;
+}
+*{
+  margin : 0;
+  padding : 0;
+  box-sizing: border-box;
+}
+.button{
+  font-weight: lighter;
+  padding: 4px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.font1{
+  font-size: 14px;
+}
+.font2{
+  font-size: 16px;
+}
+.font3{
+  font-size: 18px;
+}
+body{
+  font-family: 'DBHeavent';
+  src: local('DBHeavent') ,url(./DBHeavent.ttf) format('.ttf');
+}
+
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
