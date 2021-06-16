@@ -11,20 +11,9 @@ export default function Search(props) {
   return (
     <>
     
-    <div className="SeachBox">
-      <input placeholder="ค้นหา" />
-      <div className="box">
-        <FiSearch className="button" />
-      </div>
+    <div>
+      
     </div>
-
-    {/* {show&&<div className="SeachBoxMobile">
-      <input placeholder="ค้นหา" onBlur={()=>setShow(false)} autoFocus/>
-      <div className="box">
-        <FiSearch className="button" />
-      </div>
-    </div>}
-    {!show&&<FiSearch className="single" onClick={()=>setShow(true)}/>} */}
 
 
     </>
