@@ -28,7 +28,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
     const socket = req.headers["socket-id"] || req.body["socket-id"]
-    log(req.method + ' ' + req.path + ' from ' + (socket?socket:getIp(req)) + ' Initialized')
+    console.log(req.method + ' ' + req.path + ' from ' + (socket?socket:getIp(req)) + ' Initialized')
     req.startTime = Date.now()
     // // TODO FAKE UID 
     // let token_header = req.headers.authorization
