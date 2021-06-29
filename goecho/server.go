@@ -1,11 +1,8 @@
 package main
 
 import (
-	// "encoding/json"
-	// "fmt"
-	// "log"
-	"Pea-backend/controllers"
-	"Pea-backend/database"
+	"backend/controllers"
+	"backend/functions"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -28,7 +25,7 @@ func Test(c echo.Context) error {
 func main() {
 	app := echo.New()
 	app.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
-		Format:           "[${time_custom}] ::: ${uri} ::: ${method} ::: status - ${status} \n",
+		Format:           "[${time_custom}]  Method : ${method}  Status : ${status}  URL : ${uri} \n",
 		CustomTimeFormat: "2006-01-02 15:04:05",
 	}))
 	app.Use(middleware.CORSWithConfig(middleware.CORSConfig{
@@ -37,13 +34,13 @@ func main() {
 	}))
 	app.Use(middleware.Recover())
 
-	database.Init_table()
-	database.Init_data()
+	// database.Init_table()
+	// database.Init_data()
 
 	app.GET("/", HealthCheck)
-	app.GET("/test", Test)
-	authen := app.Group("/auth")
-	authen.GET("/login", controllers.Auth.Login)
-
-	app.Logger.Fatal(app.Start(":7001"))
+	app.GET("/check_test", Test)
+	authen := app.Group("/Auth")
+	authen.GET("/Login", controllers.Auth.Login)
+	PORT := ":" + functions.GoDotEnv("PORT")
+	app.Logger.Fatal(app.Start(PORT))
 }
