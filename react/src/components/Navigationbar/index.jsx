@@ -1,28 +1,41 @@
-// eslint-disable-next-line
-import React, { useState } from "react";
 import "./index.scss";
-import { Navbar, Nav, Button } from "react-bootstrap";
-import { NavLink, useHistory } from "react-router-dom";
-import { useEffect } from "react";
 
-import { TiThMenu } from "react-icons/ti";
+import { FiMenu } from "react-icons/fi";
+import Search from "../Search";
+import { Navbar, Container, Nav } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
-export default function Navigationbar(props) {
-  const history = useHistory();
-
-  const LogoutHandler = () => {
-    history.replace("/");
-  };
-
-  const [menu, setMenu] = useState(false);
-  const toggleMenu = () => [setMenu(!menu)];
-  const closeOpen = () => {
-    setMenu(false);
-  };
+export default function Navigationbar() {
   return (
-    <nav>
-
-    </nav>
-    
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Container>
+        <NavLink exact to="/" className="navbar-brand">
+          LOGO APP
+        </NavLink>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
+            <NavLink exact to="/page1" className="navlink">
+              page1
+            </NavLink>
+            <NavLink exact to="/page2" className="navlink">
+              page2
+            </NavLink>
+            <NavLink exact to="/page3" className="navlink">
+              page3
+            </NavLink>
+            <NavLink exact to="/page4" className="navlink">
+              page4
+            </NavLink>
+            <NavLink exact to="/" className="navlink in-logout">
+              logout
+            </NavLink>
+          </Nav>
+        </Navbar.Collapse>
+        <NavLink exact to="/" className="navlink  right-logout">
+          logout
+        </NavLink>
+      </Container>
+    </Navbar>
   );
 }

@@ -1,0 +1,54 @@
+@import "../../../styles/responsive.scss";
+
+.navbar {
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  z-index: 1000;
+  .navlink {
+    display: block;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    color: rgba(255, 255, 255, 0.5);
+    &:hover {
+      color: rgba(255, 255, 255, 1);
+      text-decoration: none;
+    }
+  }
+
+  .right-logout {
+    display: block;
+  }
+  .in-logout {
+    display: none;
+  }
+
+  @include tablet {
+    .navlink {
+      padding-right: 0.5rem;
+      padding-left: 0.5rem;
+    }
+
+    .right-logout {
+      display: none;
+    }
+    .in-logout {
+      display: block;
+    }
+  }
+  @include mobile {
+    .navlink {
+      padding-right: 0.5rem;
+      padding-left: 0.5rem;
+    }
+
+    .right-logout {
+      display: none;
+    }
+    .in-logout {
+      display: block;
+    }
+  }
+}

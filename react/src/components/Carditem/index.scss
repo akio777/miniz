@@ -1,0 +1,13 @@
+@import "../../../styles/responsive.scss";
+
+.carditem {
+  background-color: orangered;
+  width: 16rem;
+  height: 20rem;
+  margin: 16px;
+  flex: 0 1 1;
+  img {
+    width: 100%;
+    height: auto;
+  }
+}

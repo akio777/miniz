@@ -1,23 +1,28 @@
-
-:root{
-  --pink-1:#D887E5;
-  --purple-1:#7D46EA;
-  --purple-2:#8D44AD;
-  --purple-3:#8B3C7D;
-  --yellow-1:#F7DB80;
-  --yellow-2:#F2E426;
-  --yellow-3:#E5A419;
+:root {
 }
 
 body {
   margin: 0;
-  font-family: 'DBHeavent';
-  src: local('DBHeavent') ,url(./DBHeavent.ttf) format('.ttf');
+  font-family: "DBHeavent";
+  src: local("DBHeavent"), url(./DBHeavent.ttf) format(".ttf");
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: 'DBHeavent';
-  src: local('DBHeavent') ,url(./DBHeavent.ttf) format('.ttf');
+  font-family: "DBHeavent";
+  src: local("DBHeavent"), url(./DBHeavent.ttf) format(".ttf");
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(90, 90, 90, 0.5);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
 }
