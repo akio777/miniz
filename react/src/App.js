@@ -16,6 +16,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navigationbar from "./components/Navigationbar";
 
 import {Home} from './routes';
+import Content from "./components/Content";
 
 export default function App() {
   const history = useHistory();
@@ -45,18 +46,7 @@ export default function App() {
 
   const Empty = (props) => {
     return (
-      <div
-        style={{
-          fontSize: "2rem",
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "2rem",
-          backgroundColor: "pink",
-          height: "300vh",
-        }}
-      >
-        <h1>{props.word}</h1>
-      </div>
+      <Content ShowFooter={false}>{props.word}</Content>
     );
   };
 

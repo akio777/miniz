@@ -1,13 +1,23 @@
-.content{
-    // background-color: pink;
-    width: 100%;
-    margin-top: 3.5rem;
-    padding: .5vh 2vw;
-    // display: flex;
-    // flex-direction: column;
-    .inside{
-        // background-color: green;
-        display: flex;
-        flex-direction: column;
-    }
+@import "../../../styles/responsive.scss";
+
+.content {
+  margin-top: 3.5rem;
+  padding: 0.5vh 1.5rem;
+  display: flex;
+  min-height: 100%;
+  min-width: 100%;
+  justify-content: center;
+  .inside {
+    min-height: 100%;
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  @include tablet{
+    padding: 0.5vh 1.25rem;
+  }
+  @include mobile{
+    padding: 0.5vh 0.5rem;
+  }
 }

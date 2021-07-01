@@ -2,9 +2,10 @@
 
 .navbar {
   position: fixed;
-  width: 100vw;
+  width: 100%;
   top: 0;
   z-index: 1000;
+
   .navlink {
     display: block;
     text-decoration: none;
@@ -17,7 +18,8 @@
       text-decoration: none;
     }
   }
-
+  .container {
+  }
   .right-logout {
     display: block;
   }
