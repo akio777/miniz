@@ -4,9 +4,8 @@ import Slidepanel from '../../components/Slidepanel';
 
 export function Home(props){
     return(
-        <Content ShowFooter={true}>
-            <Slidepanel name="New"/>
-            <Slidepanel name="Popular"/>
+        <Content ShowFooter={!true}>
+            {/* <Slidepanel name="New"/> */}
             {/* <Slidepanel name="Popular"/> */}
         </Content>
     )
