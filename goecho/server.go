@@ -1,6 +1,7 @@
 package main
 
 import (
+	// "backend/controllers"
 	"backend/controllers"
 	"backend/functions"
 	"net/http"
@@ -39,8 +40,14 @@ func main() {
 
 	app.GET("/", HealthCheck)
 	app.GET("/check_test", Test)
-	authen := app.Group("/Auth")
-	authen.GET("/Login", controllers.Auth.Login)
+
+	users := app.Group("/authen")
+	// users.Use(middleware.BasicAuth(controllers.Auth.BasicAuth))
+	users.GET("/login", controllers.Auth.Login)
+	users.GET("/register", controllers.Auth.Register)
+
+	app.GET("/_test", controllers.Auth.Test)
+
 	PORT := ":" + functions.GoDotEnv("PORT")
 	app.Logger.Fatal(app.Start(PORT))
 }

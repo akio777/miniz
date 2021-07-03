@@ -4,6 +4,11 @@ import (
 	"database/sql"
 )
 
+type Response struct {
+	Message string      `json:"message" xml:"message"`
+	Data    interface{} `json:"data" xml:"data"`
+}
+
 type User_info struct {
 	Id       int64  `json:"id" xml:"id"`
 	Username string `json:"username" xml:"username"`

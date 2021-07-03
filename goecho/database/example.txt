@@ -1,0 +1,10 @@
+CREATE OR REPLACE function test_question_mark(which_name varchar)
+	returns table(id int, name varchar, date timestamp)
+	language plpgsql
+as
+$$
+begin
+	return query select * from invoice
+	where invoice.name like Concat('%',which_name,'%');
+end
+$$;
