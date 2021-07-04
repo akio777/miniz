@@ -57,6 +57,7 @@ func (x *Authenticate) Login(e echo.Context) error {
 	claims["user_id"] = 1
 	claims["admin"] = true
 	claims["exp"] = time.Now().Add(time.Hour * 48).Unix()
+	fmt.Println(claims["exp"])
 	tk, err := token.SignedString([]byte(functions.GoDotEnv("SECRET")))
 	if err != nil {
 		panic(err)
@@ -64,8 +65,20 @@ func (x *Authenticate) Login(e echo.Context) error {
 	return e.JSON(http.StatusOK, models.Response{Message: "login success", Data: tk})
 }
 
-func (x *Authenticate) Test(e echo.Context) error {
-	// token, err := jwt.Parse()
-	fmt.Println(e.Request().Header)
-	return nil
+func (x *Authenticate) Check(e echo.Context) error {
+	header := e.Request().Header.Get("Authorization")
+	if header != "" {
+		user := e.Get("user").(*jwt.Token)
+		claims := user.Claims.(jwt.MapClaims)
+		timestamp := claims["exp"].(float64)
+		check := time.Unix(int64(timestamp), 0)
+		remainder := check.Sub(time.Now())
+		if !(remainder > 0) {
+			return e.JSON(http.StatusUnauthorized, models.Response{Message: "token expired, please re-login"})
+		}
+
+		return e.JSON(http.StatusOK, models.Response{})
+	} else {
+		return e.JSON(http.StatusUnauthorized, models.Response{Message: "token not found"})
+	}
 }

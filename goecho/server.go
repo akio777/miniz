@@ -41,12 +41,17 @@ func main() {
 	app.GET("/", HealthCheck)
 	app.GET("/check_test", Test)
 
-	users := app.Group("/authen")
-	// users.Use(middleware.BasicAuth(controllers.Auth.BasicAuth))
-	users.GET("/login", controllers.Auth.Login)
-	users.GET("/register", controllers.Auth.Register)
+	authen := app.Group("/authen")
+	// authen.Use(middleware.BasicAuth(controllers.Auth.BasicAuth))
+	authen.GET("/login", controllers.Auth.Login)
+	authen.GET("/register", controllers.Auth.Register)
 
-	app.GET("/_test", controllers.Auth.Test)
+	users := app.Group("/services")
+	users.Use(middleware.JWT([]byte(functions.GoDotEnv("SECRET"))))
+	users.GET("", Test)
+	// users.GET("", controllers.Auth.Test)
+
+	// app.GET("/_test", controllers.Auth.Test)
 
 	PORT := ":" + functions.GoDotEnv("PORT")
 	app.Logger.Fatal(app.Start(PORT))
