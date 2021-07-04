@@ -1,9 +1,9 @@
 package main
 
 import (
-	// "backend/controllers"
 	"backend/controllers"
 	"backend/functions"
+	"backend/middlewares"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -17,7 +17,6 @@ func HealthCheck(c echo.Context) error {
 }
 
 func Test(c echo.Context) error {
-
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"message": "nothing",
 	})
@@ -48,7 +47,8 @@ func main() {
 
 	users := app.Group("/services")
 	users.Use(middleware.JWT([]byte(functions.GoDotEnv("SECRET"))))
-	users.GET("", Test)
+	users.Use(middlewares.CheckToken)
+	users.GET("/", Test)
 	// users.GET("", controllers.Auth.Test)
 
 	// app.GET("/_test", controllers.Auth.Test)
