@@ -2,6 +2,7 @@ package main
 
 import (
 	"backend/controllers"
+	"backend/database"
 	"backend/functions"
 	"backend/middlewares"
 	"net/http"
@@ -34,8 +35,7 @@ func main() {
 	}))
 	app.Use(middleware.Recover())
 
-	// database.Init_table()
-	// database.Init_data()
+	database.Init_table()
 
 	app.GET("/", HealthCheck)
 	app.GET("/check_test", Test)
@@ -46,8 +46,8 @@ func main() {
 	authen.GET("/register", controllers.Auth.Register)
 
 	users := app.Group("/services")
-	users.Use(middleware.JWT([]byte(functions.GoDotEnv("SECRET"))))
-	users.Use(middlewares.CheckToken)
+	// users.Use(middleware.JWT([]byte(functions.GoDotEnv("SECRET"))))
+	users.Use(middlewares.CheckToken())
 	users.GET("/", Test)
 	// users.GET("", controllers.Auth.Test)
 

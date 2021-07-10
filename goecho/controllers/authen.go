@@ -1,8 +1,10 @@
 package controllers
 
 import (
+	"backend/database"
 	"backend/functions"
 	"backend/models"
+	"backend/response"
 	"fmt"
 	"net/http"
 	"time"
@@ -23,21 +25,23 @@ func (x *Authenticate) BasicAuth(username string, password string, e echo.Contex
 
 var TempHash []byte
 
-func BytePassword(password string) []byte {
-	return []byte(password)
-}
-
 func (x *Authenticate) Register(e echo.Context) error {
-	// username := e.FormValue("username")
+	username := e.FormValue("username")
+	password := e.FormValue("password")
 	// TODO check this username in DB if exists return
-	// return e.JSON(http.StatusConflict, models.Response{Message: "user already exists"})
-	password := BytePassword(e.FormValue("password"))
-	hashedPassword, err := bcrypt.GenerateFromPassword(password, bcrypt.DefaultCost)
+	err := database.Create_user(username, password)
 	if err != nil {
-		panic(err)
+		return e.JSON(http.StatusBadRequest)
 	}
-	// TODO insert Users password with this hash
-	TempHash = hashedPassword
+	// return e.JSON(http.StatusConflict, models.Response{Message: "user already exists"})
+	// password := functions.BytePassword(e.FormValue("password"))
+	// hashedPassword, err := bcrypt.GenerateFromPassword(password, bcrypt.DefaultCost)
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// // TODO insert Users password with this hash
+	// TempHash = hashedPassword
+
 	return e.JSON(http.StatusCreated, models.Response{Message: "user created"})
 }
 
@@ -47,10 +51,10 @@ func (x *Authenticate) Login(e echo.Context) error {
 	// * if not exists
 	// * return e.JSON(http.StatusNotFound, models.Response{Message: "invalid username or password, please check and login again"})
 	// !TempHash must be password from Users.password
-	password := BytePassword(e.FormValue("password"))
+	password := functions.BytePassword(e.FormValue("password"))
 	err := bcrypt.CompareHashAndPassword(TempHash, password)
 	if err != nil {
-		return e.JSON(http.StatusNotFound, models.Response{Message: "invalid username or password, please check and login again"})
+		return e.JSON(http.StatusNotFound, response.Response{})
 	}
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := token.Claims.(jwt.MapClaims)
