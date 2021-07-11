@@ -4,7 +4,6 @@ import (
 	"backend/database"
 	"backend/models"
 	"backend/response"
-	"fmt"
 	"net/http"
 
 	// "golang.org/x/crypto/bcrypt"
@@ -30,9 +29,9 @@ func (x *_Authen) Register(e echo.Context) error {
 		return e.JSON(response.InvalidBody())
 	}
 	if err := User.Create(database.DB, user); err != nil {
-		fmt.Println(err)
+		return e.JSON(response.UserConflict())
 	}
-	return e.JSON(http.StatusOK, "")
+	return e.JSON(response.Success())
 }
 
 func (x *_Authen) Login(e echo.Context) error {

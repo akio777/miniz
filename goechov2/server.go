@@ -33,8 +33,10 @@ func main() {
 		svc.GoDotEnv("POSTGRES_USER"),
 		svc.GoDotEnv("POSTGRES_PASSWORD"),
 		svc.GoDotEnv("POSTGRES_PORT"),
-		svc.GoDotEnv("POSTGRES_DM"),
+		svc.GoDotEnv("POSTGRES_DB"),
 	)
+
+	svc.User.Init(database.DB)
 
 	app.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
 		Format:           "[${time_custom}]  Method : ${method}  Status : ${status}  URL : ${uri} \n",
