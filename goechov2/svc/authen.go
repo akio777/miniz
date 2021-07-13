@@ -4,6 +4,7 @@ import (
 	"backend/database"
 	"backend/models"
 	"backend/response"
+	"fmt"
 	"net/http"
 
 	// "golang.org/x/crypto/bcrypt"
@@ -35,7 +36,13 @@ func (x *_Authen) Register(e echo.Context) error {
 }
 
 func (x *_Authen) Login(e echo.Context) error {
-	// password := svc.BytePassword(e.FormValue("password"))
+	username := e.FormValue("username")
+	password := BytePassword(e.FormValue("password"))
+	fmt.Println(username)
+	fmt.Println(password)
+	if _, err := User.Read(database.DB, username); err != nil {
+
+	}
 	// err := bcrypt.CompareHashAndPassword(, password)
 	// if err != nil {
 	// 	return e.JSON(http.StatusNotFound, "")
