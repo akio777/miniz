@@ -56,14 +56,9 @@ func (u *_User) Create(DB *sql.DB, user *models.User_info) error {
 	return nil
 }
 
-func (u *_User) Read(DB *sql.DB, username string) ([]models.User_info, error) {
-	users := []models.User_info{}
-	rows, err := DB.Query(fmt.Sprintf(_read, username))
-	if err != nil {
-		return users, err
-	}
-	for rows.Next() {
-	}
-
+func (u *_User) Read(DB *sql.DB, username string) (models.User_info, error) {
+	users := models.User_info{}
+	row := DB.QueryRow(fmt.Sprintf(_read, username))
+	err := row.Scan(&users)
 	return users, nil
 }
