@@ -8,6 +8,7 @@ require (
 	github.com/cznic/ql v1.2.0 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-ini/ini v1.39.0 // indirect
+	github.com/go-pg/pg/v10 v10.10.2 // indirect
 	github.com/golang-migrate/migrate/v4 v4.14.1 // indirect
 	github.com/golang/lint v0.0.0-20180702182130-06c8688daad7 // indirect
 	github.com/googleapis/gax-go v2.0.0+incompatible // indirect
@@ -20,7 +21,7 @@ require (
 	github.com/labstack/echo/v4 v4.3.0
 	github.com/lib/pq v1.10.2 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	golang.org/x/crypto v0.0.0-20210322153248-0c34fe9e7dc2
+	golang.org/x/crypto v0.0.0-20210421170649-83a5a9bb288b
 	golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba // indirect
 	gopkg.in/ini.v1 v1.39.0 // indirect
 )

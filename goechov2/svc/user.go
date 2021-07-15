@@ -2,11 +2,10 @@ package svc
 
 import (
 	"backend/models"
-	"database/sql"
 	"fmt"
-	"log"
-
+	"github.com/go-pg/pg/v10"
 	"golang.org/x/crypto/bcrypt"
+	"log"
 )
 
 type _User struct{}
@@ -33,7 +32,7 @@ const (
 	`
 )
 
-func (u *_User) Init(DB *sql.DB) error {
+func (u *_User) Init(DB *pg.DB) error {
 	_, err := DB.Exec(_init)
 	if err != nil {
 		log.Fatalln(err)
@@ -42,23 +41,27 @@ func (u *_User) Init(DB *sql.DB) error {
 	return nil
 }
 
-func (u *_User) Create(DB *sql.DB, user *models.User_info) error {
+func (u *_User) Create(DB *pg.DB, user *models.Users) error {
 
 	pwd := BytePassword(user.Password)
-
+	fmt.Println(pwd)
 	hashPwd, err := bcrypt.GenerateFromPassword(pwd, bcrypt.DefaultCost)
+	user.Password = string(hashPwd)
 	if err != nil {
 		return err
 	}
-	if _, err = DB.Exec(_insert, user.Username, string(hashPwd)); err != nil {
+	if _, err := DB.Model(user).Insert(); err != nil {
 		return fmt.Errorf("username already exists")
 	}
 	return nil
 }
 
-func (u *_User) Read(DB *sql.DB, username string) (models.User_info, error) {
-	users := models.User_info{}
-	row := DB.QueryRow(fmt.Sprintf(_read, username))
-	err := row.Scan(&users)
-	return users, nil
+func (u *_User) ReadByUsername(DB *pg.DB, username string) (*models.Users, error) {
+	user := new(models.Users)
+	if err := DB.Model(user).Where("username=?", username).Select(); err != nil {
+		return nil, err
+	}
+	return user, nil
+
+	// row := DB.QueryRow(fmt.Sprintf(_read, username))
 }

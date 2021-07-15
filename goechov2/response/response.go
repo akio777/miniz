@@ -10,3 +10,13 @@ type Response struct {
 func Success() (int, interface{}) {
 	return http.StatusCreated, Response{Message: "create success"}
 }
+
+func OK(msg string, data interface{}) (int, interface{}) {
+	return http.StatusOK, Response{Message: msg, Data: data}
+}
+func InvalidBody() (int, interface{}) {
+	return http.StatusBadRequest, Response{Message: "invalid body"}
+}
+func InternalError(msg string) (int, interface{}) {
+	return http.StatusInternalServerError, Response{Message: msg}
+}

@@ -1,26 +1,28 @@
 package database
 
 import (
-	"database/sql"
+	"fmt"
 	"log"
 
+	"github.com/go-pg/pg/v10"
 	_ "github.com/lib/pq"
+	// "github.com/go-pg/pg/v10/orm"
 )
 
-var DB *sql.DB
+var DB *pg.DB
 
 func ConnectingDatabase(user string, password string, port string, db_name string) {
-	DB_URL := `postgres://` + user +
-		`:` + password + `@` + `localhost:5434` + `/` +
-		db_name + `?sslmode=disable`
-	db, err := sql.Open("postgres", DB_URL)
-	if err != nil {
-		log.Printf("Unable to connect database : %v\n", err)
+	DB_URL := fmt.Sprintf("%s:%s", "localhost", port)
+	options := &pg.Options{
+		User:     user,
+		Password: password,
+		Addr:     DB_URL,
+		Database: db_name,
+		PoolSize: 50,
 	}
-	err = db.Ping()
-	if err != nil {
-		log.Printf("database connection error : %v\n", err)
-		// 	panic(err)
+	conn := pg.Connect(options)
+	if conn == nil {
+		log.Println("Unable to connect database")
 	}
-	DB = db
+	DB = conn
 }

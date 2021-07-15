@@ -4,9 +4,12 @@ import (
 	"net/http"
 )
 
-func InvalidBody() (int, interface{}) {
-	return http.StatusBadRequest, Response{Message: "invalid body"}
-}
 func UserConflict() (int, interface{}) {
 	return http.StatusConflict, Response{Message: "user already exists"}
+}
+func UserNotfound() (int, interface{}) {
+	return http.StatusNotFound, Response{Message: "user not exists"}
+}
+func InvalidPassword() (int, interface{}) {
+	return http.StatusUnauthorized, Response{Message: "password invalid"}
 }
